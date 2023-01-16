@@ -13,7 +13,7 @@ public class AuthTest {
         // Шаг 2. Нажать на кнопку с текстом Sign in
         $("[href='/login']").click();
         // Шаг 3. Заполнить инпуты логина и пароля
-        $("[id='login_field']").sendKeys("xenia-efimova");
+        $("[id='login_field']").sendKeys("qwerty1234");
         $("[id='password']").sendKeys("qwerty");
         // Шаг 4. Нажать на кнопку с текстом Sign in
         $("[name='commit']").click();
