@@ -4,17 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ProfileTests {
 
     @BeforeEach
-    public void swithToRepositiriesPage() {
-        // Открыть страницу с результатами поиска по запросу "junit-team/junit4"
-        open("https://github.com/search?q=junit-team%2Fjunit4");
-        // В списке репозиториев нажать на "junit-team/junit4"
-         TestPages.repositoryPage.repositoryNameButton().click();
+    public void switchToRepositoriesPage() {
+        // Открыть страницу репозитория "junit-team/junit4"
+        open("https://github.com/junit-team/junit4");
         // Проверка отображения страницы репозитория "junit-team/junit4"
         TestPages.repositoryPage.repositoryContainerHeader().shouldHave(text("junit4"));
     }
@@ -25,7 +24,7 @@ public class ProfileTests {
         // Открыть выпадающий список с наименованиями веток
         TestPages.repositoryPage.dropdownWithNamesOfBranches().click();
         // Кликнуть на название ветки "fixtures"
-        TestPages.repositoryPage.linkToBranchFixtures().click();
+        TestPages.repositoryPage.selectMenuItem().filter(text("fixtures")).first().click();
         // Проверка отображения страницы ветки fixtures
         TestPages.repositoryPage.tagOfBranchFixtures().shouldHave(Condition.text("fixtures"));
     }
@@ -42,7 +41,8 @@ public class ProfileTests {
         // Нажать Enter
         TestPages.repositoryPage.releasesSearchString().pressEnter();
         //Проверка существования названия релиза с введенным номером
-        TestPages.repositoryPage.releaseCard().shouldHave(text("4.13.2"));
+        TestPages.repositoryPage.releaseCard().shouldHave(size(1));
+        TestPages.repositoryPage.releaseCard().shouldHave(texts("4.13.2"));
     }
 
     @Test
@@ -56,6 +56,7 @@ public class ProfileTests {
         TestPages.repositoryPage.releasesSearchString().sendKeys("Beta");
         TestPages.repositoryPage.releasesSearchString().pressEnter();
         //Проверка существования названия релиза с введенными буквами
-        TestPages.repositoryPage.releaseCard().shouldHave(text("Beta"));
+        TestPages.repositoryPage.releaseCard().shouldHave(size(6));
+        TestPages.repositoryPage.releaseCard().first().shouldHave(text("Beta"));
     }
 }

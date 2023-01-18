@@ -1,14 +1,12 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class RepositoryPage {
-
-    public SelenideElement repositoryNameButton() {
-        return $("[href='/junit-team/junit4']").as("название репозитория junit-team/junit4");
-    }
 
     public SelenideElement repositoryContainerHeader() {
         return $("[id='repository-container-header']").as("хедер репозитория");
@@ -16,8 +14,8 @@ public class RepositoryPage {
     public SelenideElement dropdownWithNamesOfBranches() {
         return $("[id='branch-select-menu']").as("выпадающий список с наименованиями веток");
     }
-    public SelenideElement linkToBranchFixtures() {
-        return $("[href='https://github.com/junit-team/junit4/tree/fixtures']").as("ссылка на ветку fixtures");
+    public ElementsCollection selectMenuItem() {
+        return $$(".SelectMenu-item").as("слоты для выбора в выпадающем списке");
     }
     public SelenideElement tagOfBranchFixtures() {
         return  $(".css-truncate .css-truncate-target").as("тег fixtures");
@@ -28,8 +26,8 @@ public class RepositoryPage {
     public SelenideElement releasesSearchString () {
         return  $("[id='release-filter']").as("поисковая строка");
     }
-    public SelenideElement releaseCard () {
-        return $("[data-test-selector='release-card']").as("блок с информацией о релизе");
+    public ElementsCollection releaseCard () {
+        return $$("[data-test-selector='release-card']").as("блок с информацией о релизе");
     }
 
 }
