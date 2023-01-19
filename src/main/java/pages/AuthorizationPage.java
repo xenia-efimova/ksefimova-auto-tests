@@ -14,4 +14,7 @@ public class AuthorizationPage {
     public SelenideElement singInButton() {
         return $("[name='commit']").as("кнопка авторизации");
     }
+    public SelenideElement flashAlert() {
+        return $(".js-flash-alert").as("сообщение об ошибке");
+    }
 }

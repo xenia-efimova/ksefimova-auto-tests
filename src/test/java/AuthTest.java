@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 
 public class AuthTest {
@@ -31,5 +32,17 @@ public class AuthTest {
         TestPages.mainPage.yourProfileButton().click();
         // Шаг 8. Проверка открытия страницы профиля
         TestPages.mainPage.editProfileButton().shouldBe(Condition.visible);
+    }
+
+    @Test
+    @DisplayName("Безуспешная авторизация с некорректными данными")
+    public void shouldNotAuthorizeTest() {
+        // Шаг 3. Заполнить инпуты логина и пароля
+        TestPages.authorizationPage.loginInput().sendKeys("qwerty");
+        TestPages.authorizationPage.passwordInput().sendKeys("qwerty");
+        // Шаг 4. Нажать на кнопку с текстом Sign in
+        TestPages.authorizationPage.singInButton().click();
+        // Шаг 5. Проверка отображения сообщения об ошибке
+        TestPages.authorizationPage.flashAlert().shouldBe(Condition.visible).shouldHave(text("Incorrect username or password"));
     }
 }
