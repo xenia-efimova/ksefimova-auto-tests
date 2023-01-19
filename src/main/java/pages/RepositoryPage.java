@@ -14,7 +14,7 @@ public class RepositoryPage {
     public SelenideElement dropdownWithNamesOfBranches() {
         return $("[id='branch-select-menu']").as("выпадающий список с наименованиями веток");
     }
-    public ElementsCollection selectMenuItem() {
+    public ElementsCollection selectMenuItems() {
         return $$(".SelectMenu-item").as("слоты для выбора в выпадающем списке");
     }
     public SelenideElement tagOfBranchFixtures() {
@@ -26,8 +26,8 @@ public class RepositoryPage {
     public SelenideElement releasesSearchString () {
         return  $("[id='release-filter']").as("поисковая строка");
     }
-    public ElementsCollection releaseCard () {
-        return $$("[data-test-selector='release-card']").as("блок с информацией о релизе");
+    public ElementsCollection releaseCards () {
+        return $$(".Box-body").as("блоки с информацией о релизе");
     }
 
 }

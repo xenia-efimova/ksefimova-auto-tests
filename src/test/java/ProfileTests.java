@@ -24,7 +24,7 @@ public class ProfileTests {
         // Открыть выпадающий список с наименованиями веток
         TestPages.repositoryPage.dropdownWithNamesOfBranches().click();
         // Кликнуть на название ветки "fixtures"
-        TestPages.repositoryPage.selectMenuItem().filter(text("fixtures")).first().click();
+        TestPages.repositoryPage.selectMenuItems().filter(text("fixtures")).first().click();
         // Проверка отображения страницы ветки fixtures
         TestPages.repositoryPage.tagOfBranchFixtures().shouldHave(Condition.text("fixtures"));
     }
@@ -41,8 +41,8 @@ public class ProfileTests {
         // Нажать Enter
         TestPages.repositoryPage.releasesSearchString().pressEnter();
         //Проверка существования названия релиза с введенным номером
-        TestPages.repositoryPage.releaseCard().shouldHave(size(1));
-        TestPages.repositoryPage.releaseCard().shouldHave(texts("4.13.2"));
+        TestPages.repositoryPage.releaseCards().shouldHave(size(1));
+        TestPages.repositoryPage.releaseCards().shouldHave(texts("4.13.2"));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ProfileTests {
         TestPages.repositoryPage.releasesSearchString().sendKeys("Beta");
         TestPages.repositoryPage.releasesSearchString().pressEnter();
         //Проверка существования названия релиза с введенными буквами
-        TestPages.repositoryPage.releaseCard().shouldHave(size(6));
-        TestPages.repositoryPage.releaseCard().first().shouldHave(text("Beta"));
+        TestPages.repositoryPage.releaseCards().shouldHave(size(6));
+        TestPages.repositoryPage.releaseCards().first().shouldHave(text("Beta"));
     }
 }
