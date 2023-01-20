@@ -9,6 +9,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
+@Owner("xenia-efimova")
+
 public class AuthTest {
 
     @BeforeEach
@@ -22,7 +24,6 @@ public class AuthTest {
     }
 
     @Test
-    @Owner("xenia-efimova")
     @DisplayName("Успешная авторизация")
     @Feature("Авторизация")
     public void shouldAuthorizeTest() {
@@ -33,7 +34,7 @@ public class AuthTest {
         step("Нажать на кнопку с текстом Sign in", () -> {
             TestPages.authorizationPage.singInButton().click();
         });
-        step("Проверка отображения главной страницы после авторизации", () -> {
+        step("Проверить, что отображается главная страница после авторизации", () -> {
             TestPages.mainPage.mainPageHeader().shouldBe(Condition.visible);
         });
         step("Кликнуть на кнопку открытия выпадающего списка", () -> {
@@ -42,13 +43,12 @@ public class AuthTest {
         step("Кликнуть на пункт Your profile в выпадающем списке", () -> {
             TestPages.mainPage.yourProfileButton().click();
         });
-        step("Проверка открытия страницы профиля", () -> {
+        step("Убедиться в том, что открылась страница профиля", () -> {
             TestPages.mainPage.editProfileButton().shouldBe(Condition.visible);
         });
     }
 
     @Test
-    @Owner("xenia-efimova")
     @DisplayName("Безуспешная авторизация с некорректными данными")
     @Feature("Авторизация")
     public void shouldNotAuthorizeTest() {
@@ -59,7 +59,7 @@ public class AuthTest {
         step("Нажать на кнопку с текстом Sign in", () -> {
             TestPages.authorizationPage.singInButton().click();
         });
-        step("Проверка отображения сообщения об ошибке", () -> {
+        step("Проверить, что отображается сообщение об ошибке", () -> {
             TestPages.authorizationPage.flashAlert().shouldBe(Condition.visible).shouldHave(text("Incorrect username or password"));
         });
     }
